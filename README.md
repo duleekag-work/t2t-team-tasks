@@ -73,6 +73,7 @@ We use **Docker Volumes** in `docker-compose.yml`. You can edit code in VS Code,
 
 ## 🛑 Useful Commands
 * `docker compose up --build`: Build and start all services.
+* `docker compose up --d`: Start all services in detached mode.
 * `docker compose down`: Stop and remove all containers and networks.
 * `docker compose logs -f [service]`: Tail logs for a specific service (e.g., `backend`).
 * `docker compose ps`: Check the health status of all services.
