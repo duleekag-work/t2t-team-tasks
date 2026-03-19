@@ -1,0 +1,35 @@
+{
+    "name": "Team Tasker Solo Dev Environment",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/app",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    "runArgs": ["--network=t2t_default"],
+    "initializeCommand": "docker network create t2t_default || true",
+    "postCreateCommand": "pip install --no-cache-dir -r backend/requirements.txt && pip install --no-cache-dir -r frontend/requirements.txt",
+    "postStartCommand": "sudo chmod 666 /var/run/docker.sock",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylint",
+                "ms-azuretools.vscode-docker",
+                "ms-python.debugpy"
+            ],
+            "settings": {
+                "python.analysis.extraPaths": ["/app"],
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.terminal.activateEnvInSelectedTerminal": true
+            }
+        }
+    },
+    "containerEnv": {
+        "PYTHONPATH": "/app"
+    },
+    "remoteUser": "root"
+}
